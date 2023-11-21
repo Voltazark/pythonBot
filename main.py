@@ -12,7 +12,7 @@ names_list_1 = ["Ace", "Amaru", "Ash", "Blackbeard", "Blitz", "Buck",
                 "Gridlock", "Hibana", "Iana", "IQ", "Jackal", "Kali",
                 "Lion", "Maverick", "Montagne", "Nomad", "Nøkk", "Osa",
                 "Sledge", "Thatcher", "Thermite", "Twitch", "Ying", "Zero",
-                "Zofia", "Thorn", "Azami", "Sens", "Grim", "Solis", "RAM"]
+                "Zofia", "Thorn", "RAM"]
 names_list_2 = ["Smoke", "Mute", "Castle", "Pulse", "Doc", "Rook",
                 "Seva buy SSD", "Kapkan", "Tachanka", "Jäger", "Bandit", "Frost",
                 "Valkyrie", "Caveira", "Echo", "Lesion", "Ela", "Vigil",
@@ -82,6 +82,11 @@ def button_click(update: Update, context: CallbackContext) -> None:
             reply_markup=new_reply_markup
         )
 
+# Функция для обработки команды /exit
+def exit_bot(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text("Бот завершает работу.")
+    context.bot.stop()
+
 # Основная функция
 def main() -> None:
     updater = Updater(TOKEN)
@@ -89,6 +94,7 @@ def main() -> None:
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("exit", exit_bot))
     dp.add_handler(CallbackQueryHandler(button_click))
 
     updater.start_polling()
@@ -97,6 +103,7 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
 
 
 
